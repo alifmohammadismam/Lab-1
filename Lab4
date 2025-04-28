@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class PassFailChecker {
+    // Method to calculate the sum of three numbers and determine if the total is more than 80
+    public static void main(String[] args) {
+        // Create a Scanner object for user input
+        Scanner scanner = new Scanner(System.in);
+        
+        // Prompt user for input
+        System.out.print("Enter the first number: ");
+        int num1 = scanner.nextInt();
+        
+        System.out.print("Enter the second number: ");
+        int num2 = scanner.nextInt();
+        
+        System.out.print("Enter the third number: ");
+        int num3 = scanner.nextInt();
+        
+        // Calculate the sum of the numbers
+        int sum = num1 + num2 + num3;
+        
+        // Check if the sum is greater than 80 and display the result
+        if (sum > 80) {
+            System.out.println("Pass");
+        } else {
+            System.out.println("Fail");
+        }
+        
+        // Close the scanner to avoid resource leaks
+        scanner.close();
+    }
+}
