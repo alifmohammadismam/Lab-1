@@ -1,0 +1,56 @@
+public class Example {
+    // Private float variables
+    private float var1;
+    private float var2;
+
+    // Private method to add the two floats
+    private float addFloats() {
+        return var1 + var2;
+    }
+
+    // Public constructor to initialize the private variables
+    public Example(float a, float b) {
+        this.var1 = a;
+        this.var2 = b;
+    }
+
+    // Public method to display the sum (uses the private method)
+    public void displaySum() {
+        System.out.println("Sum of " + var1 + " and " + var2 + " is: " + addFloats());
+    }
+
+    // Public getter for var1
+    public float getVar1() {
+        return var1;
+    }
+
+    // Public setter for var1
+    public void setVar1(float var1) {
+        this.var1 = var1;
+    }
+
+    // Public getter for var2
+    public float getVar2() {
+        return var2;
+    }
+
+    // Public setter for var2
+    public void setVar2(float var2) {
+        this.var2 = var2;
+    }
+
+    public static void main(String[] args) {
+        // Create an instance of Example
+        Example example = new Example(3.5f, 4.2f);
+
+        // Display the sum using the public method (which internally uses the private method)
+        example.displaySum(); // Output: Sum of 3.5 and 4.2 is: 7.7
+
+        // Modify values using setters
+        example.setVar1(10.1f);
+        example.setVar2(5.5f);
+
+        // Display the new sum
+        example.displaySum(); // Output: Sum of 10.1 and 5.5 is: 15.6
+    }
+}
