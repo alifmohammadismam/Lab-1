@@ -1,0 +1,44 @@
+class Book {
+    String title;
+    String author;
+    String isbn;
+
+    Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+
+    String getDetails() {
+        return "Title: " + title + "\nAuthor: " + author + "\nISBN: " + isbn;
+    }
+}
+
+class BorrowedBook extends Book {
+    String borrowerName;
+    String dueDate;
+
+    BorrowedBook(String title, String author, String isbn, String borrowerName, String dueDate) {
+        super(title, author, isbn);
+        this.borrowerName = borrowerName;
+        this.dueDate = dueDate;
+    }
+
+    String getBorrowDetails() {
+        return getDetails() + "\nBorrower Name: " + borrowerName + "\nDue Date: " + dueDate;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        BorrowedBook borrowedBook = new BorrowedBook(
+            "The Great Gatsby",
+            "F. Scott Fitzgerald",
+            "9780743273565",
+            "Alice Johnson",
+            "2025-05-15"
+        );
+
+        System.out.println(borrowedBook.getBorrowDetails());
+    }
+}
