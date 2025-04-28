@@ -1,0 +1,95 @@
+abstract class BankAccount {
+    protected double balance;
+
+    public BankAccount(double balance) {
+        this.balance = balance;
+    }
+ public void deposit(double amount) {
+        balance += amount;
+    }
+    public abstract void withdraw(double amount);
+
+    public double getBalance() {
+        return balance;
+    }
+}
+class SavingsAccount extends BankAccount {
+    private static final double WITHDRAWAL_LIMIT = 5000.0;
+
+    public SavingsAccount(double balance) {
+        super(balance);
+    }
+    public void withdraw(double amount) {
+        if (amount > WITHDRAWAL_LIMIT) {
+            System.out.println("Withdrawal amount exceeds the limit of " + WITHDRAWAL_LIMIT);
+        } else if (amount > balance) {
+            System.out.println("Insufficient balance.");
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawal successful. New Balance: " + balance);
+        }
+    }
+}
+class CurrentAccount extends BankAccount {
+
+    public CurrentAccount(double balance) {
+        super(balance);
+    }
+    public void withdraw(double amount) {
+        if (amount > balance) {
+            System.out.println("Insufficient balance.");
+        } else {
+            balance -= amount;
+            System.out.println("Withdrawal successful. New Balance: " + balance);
+        }
+    }
+}
+interface Payable {
+    double calculateSalary();
+}
+class FullTimeEmployee implements Payable {
+    private double fixedSalary;
+
+    public FullTimeEmployee(double fixedSalary) {
+        this.fixedSalary = fixedSalary;
+    }
+    public double calculateSalary() {
+        return fixedSalary;
+    }
+}
+class ContractEmployee implements Payable {
+    private double hourlyRate;
+    private int hoursWorked;
+
+    public ContractEmployee(double hourlyRate, int hoursWorked) {
+        this.hourlyRate = hourlyRate;
+        this.hoursWorked = hoursWorked;
+    }
+    public double calculateSalary() {
+        return hourlyRate * hoursWorked;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        SavingsAccount savings = new SavingsAccount(10000);
+        CurrentAccount current = new CurrentAccount(15000);
+
+        System.out.println("Savings Account:");
+        savings.deposit(2000);
+        savings.withdraw(6000);  // Should show withdrawal limit message
+        savings.withdraw(4000);  // Successful withdrawal
+        System.out.println("Savings Account Balance: " + savings.getBalance());
+
+        System.out.println("\nCurrent Account:");
+        current.deposit(3000);
+        current.withdraw(10000);  // Successful withdrawal
+        System.out.println("Current Account Balance: " + current.getBalance());
+
+        // Test Payable interface
+        FullTimeEmployee fullTime = new FullTimeEmployee(50000);
+        ContractEmployee contract = new ContractEmployee(200, 120);
+
+        System.out.println("\nFull Time Employee Salary: " + fullTime.calculateSalary());
+        System.out.println("Contract Employee Salary: " + contract.calculateSalary());
+    }
+}
